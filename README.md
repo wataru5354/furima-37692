@@ -71,13 +71,12 @@ Things you may want to cover:
 |------------------|------------|--------------------------------|
 | item             | references | null: false, foreign_key: true |
 | user             | references | null: false, foreign_key: true |
-| address_id       | references | null: false, foreign_ket: true |
 
 ### Association
 
 - belongs_to :item
 - belongs_to :user
-- belongs_to :address
+- has_one :address
 
 
 ## addresses table
@@ -90,7 +89,8 @@ Things you may want to cover:
 | address          | string     | null: false                    |
 | building_name    | string     |                                |
 | phone            | string     | null: false                    |
+| purchase_id      | integer    | null: false, foreign_key:true  |
 
 ### Association
 
-- has_many :purchases
+- belongs_to :purchase
