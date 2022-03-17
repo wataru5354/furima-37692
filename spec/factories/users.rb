@@ -15,4 +15,3 @@ FactoryBot.define do
     birthday              { Faker::Date.birthday(min_age: 18, max_age: 70) }
   end
 end
-
