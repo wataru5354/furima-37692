@@ -11,10 +11,10 @@ class User < ApplicationRecord
   validates :last_name, presence: true,
                         format: { with: VALID_NAME_WIDTH_REGEX, message: 'is invalid. Input full-width characters' }
   validates :first_name, presence: true,
-                          format: { with: VALID_NAME_WIDTH_REGEX, message: 'is invalid. Input full-width characters' }
+                         format: { with: VALID_NAME_WIDTH_REGEX, message: 'is invalid. Input full-width characters' }
   VALID_NAME_KANA_REGEX = /\A[ァ-ヶー－]+\z/.freeze
   validates :last_name_kana, presence: true,
-                              format: { with: VALID_NAME_KANA_REGEX, message: 'is invalid. Input full-width katakana characters' }
+                             format: { with: VALID_NAME_KANA_REGEX, message: 'is invalid. Input full-width katakana characters' }
   validates :first_name_kana, presence: true,
                               format: { with: VALID_NAME_KANA_REGEX, message: 'is invalid. Input full-width katakana characters' }
   validates :birthday, presence: true
