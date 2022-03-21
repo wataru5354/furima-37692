@@ -1,8 +1,8 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: :index
+  before_action :set_item
 
   def index
-    @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new
     redirect_to root_path if current_user.id == @item.user_id || @item.purchase.present?
   end
@@ -25,6 +25,10 @@ class PurchasesController < ApplicationController
     params.require(:purchase_address).permit(:post_code, :prefecture_id, :city, :address, :building_name, :phone).merge(
       user_id: current_user.id, item_id: params[:item_id], token: params[:token]
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item

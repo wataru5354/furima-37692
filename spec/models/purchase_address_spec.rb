@@ -20,6 +20,9 @@ RSpec.describe PurchaseAddress, type: :model do
 
     context '商品購入ができない場合' do
       it 'tokenが空では購入できない' do
+        @purchase_address.token = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include "Token can't be blank"
       end
       it 'post_codeが空では購入できない' do
         @purchase_address.post_code = ''
@@ -90,6 +93,11 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.phone = '09012345'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include 'Phone number is too short'
+      end
+      it 'phoneが12桁以上では購入できない' do
+        @purchase_address.phone = '123456789123'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include
       end
       it 'itemと紐付いていなければ購入できない' do
         @purchase_address.item_id = nil
