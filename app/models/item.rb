@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   validates :price, presence: true, numericality: { only_integer: true, message: 'is invalid. Input half-width numbers' },
                     inclusion: { in: 300..9_999_999, message: 'is out of setting range' }
   belongs_to :user
-  # has_one :purchase
+  has_one :purchase
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
