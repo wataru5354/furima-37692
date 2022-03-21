@@ -92,12 +92,12 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'phoneが10桁より少ないと購入できない' do
         @purchase_address.phone = '09012345'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include 'Phone number is too short'
+        expect(@purchase_address.errors.full_messages).to include 'Phone number is invalid. Enter 10 to 11 characters'
       end
       it 'phoneが12桁以上では購入できない' do
-        @purchase_address.phone = '123456789123'
+        @purchase_address.phone = '1234567891233'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include
+        expect(@purchase_address.errors.full_messages).to include 'Phone number is invalid. Enter 10 to 11 characters'
       end
       it 'itemと紐付いていなければ購入できない' do
         @purchase_address.item_id = nil
