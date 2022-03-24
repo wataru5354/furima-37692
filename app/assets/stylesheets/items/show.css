@@ -138,6 +138,18 @@
   margin-right: 5px;
 }
 
+.comment {
+  display: flex;
+}
+.comment p{
+  margin: 0;
+}
+
+.user-info{
+  color: gray;
+  font-weight: bold;
+}
+
 
 /* /商品の概要 */
 
