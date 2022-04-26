@@ -228,6 +228,7 @@
   font-size: 13px;
 }
 
+/* 商品画像のサイズ調整 */
 .preview-image{
   height: 150px;
   width: auto;
