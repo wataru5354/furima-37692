@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :items
   has_many :purchases
   has_many :comments
+  has_one :card, dependent: :destroy
 
   validates :nickname, presence: true
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze

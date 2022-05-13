@@ -5,6 +5,12 @@ class PurchasesController < ApplicationController
   def index
     @purchase_address = PurchaseAddress.new
     redirect_to root_path if current_user.id == @item.user_id || @item.purchase.present?
+    card = Card.find_by(user_id: current_user.id)
+
+    if card.present?
+      customer = Payjp::Customer.retrieve(card.customer_token)
+      @card = customer.cards.first
+    end
   end
 
   def create
@@ -31,11 +37,21 @@ class PurchasesController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    Payjp::Charge.create(
-      amount: @item.price,
-      card: purchase_params[:token],
-      currency: 'jpy'
-    )
+    if @card.present?
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+      customer_token = current_user.card.customer_token
+      Payjp::Charge.create(
+        amount: @item.price,
+        customer: customer_token,
+        currency: 'jpy'
+      )
+    else
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+      Payjp::Charge.create(
+        amount: @item.price,
+        card: purchase_params[:token],
+        currency: 'jpy'
+      )
+    end
   end
 end
