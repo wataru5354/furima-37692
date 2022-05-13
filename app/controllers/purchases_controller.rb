@@ -45,7 +45,6 @@ class PurchasesController < ApplicationController
 
   def pay_item
     if @card.present?
-      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       customer_token = current_user.card.customer_token
       Payjp::Charge.create(
         amount: @item.price,
@@ -53,7 +52,6 @@ class PurchasesController < ApplicationController
         currency: 'jpy'
       )
     else
-      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       Payjp::Charge.create(
         amount: @item.price,
         card: purchase_params[:token],
