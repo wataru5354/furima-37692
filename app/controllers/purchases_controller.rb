@@ -15,6 +15,13 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase_address = PurchaseAddress.new(purchase_params)
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    card = Card.find_by(user_id: current_user.id)
+    if card.present?
+      customer = Payjp::Customer.retrieve(card.customer_token)
+      @card = customer.cards.first
+      @purchase_address.token = current_user.card.customer_token
+    end
     if @purchase_address.valid?
       pay_item
       @purchase_address.save
