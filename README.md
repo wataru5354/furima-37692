@@ -44,6 +44,8 @@ Things you may want to cover:
 - has_many :items
 - has_many :purchases
 - has_many :comments
+- has_one :card
+- has_many :favorites
 
 
 ## items table
@@ -65,6 +67,7 @@ Things you may want to cover:
 - belongs_to :user
 - has_one :purchase
 - has_many :comments
+- has_many :favorites
 
 
 ## purchases table
@@ -107,6 +110,27 @@ Things you may want to cover:
 | item_id   | integer |
 
 ### Association
+
+- belongs_to :user
+- belongs_to :item
+
+## cards table
+| Column           | Type       | Options                        |
+|------------------|------------|--------------------------------|
+| customer_token   | string     | null: false                    |
+| user             | references | null: false, foreign_key: true |
+
+### Associations
+
+- belongs_to :user
+
+## favorite table
+| Column | Type       | Options                        |
+|--------|------------|--------------------------------|
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+
+### Associations
 
 - belongs_to :user
 - belongs_to :item
