@@ -13,6 +13,10 @@ class Item < ApplicationRecord
   has_many :comments
   has_many :favorites, dependent: :destroy
 
+  def favorited?(user)
+    favorites.where(user_id: user.id).exists?
+  end
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :status

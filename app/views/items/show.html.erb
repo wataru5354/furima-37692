@@ -64,10 +64,21 @@
       </tbody>
     </table>
     <div class="option">
-      <div class="favorite-btn">
-        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-        <span>お気に入り 0</span>
-      </div>
+      <%if @item.favorited?(current_user) %>
+        <%= link_to item_favorite_path(@item.id), method: :delete  do %>
+          <div class="favorite-btn" style="background-color:yellow;">
+            <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+            <span>お気に入り 0</span>
+          </div>
+        <% end%>
+      <% else %>
+        <%= link_to item_favorites_path(@item.id), method: :post do %>
+          <div class="favorite-btn">
+            <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+            <span>お気に入り 0</span>
+          </div>
+        <% end%>
+      <% end%>
       <div class="report-btn">
         <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
         <span>不適切な商品の通報</span>
