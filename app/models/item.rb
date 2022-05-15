@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   has_one :purchase
   has_one_attached :image
   has_many :comments
+  has_many :favorites, dependent: :destroy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
