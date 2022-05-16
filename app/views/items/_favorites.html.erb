@@ -1,0 +1,15 @@
+<%if @item.favorited?(current_user) %>
+  <%= link_to item_favorite_path(@item.id), method: :delete,remote: true do %>
+    <div class="favorite-btn" style="background-color:yellow;">
+      <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+      <span>お気に入り <%= @favorite_count %></span>
+    </div>
+  <% end%>
+<% else %>
+  <%= link_to item_favorites_path(@item.id), method: :post, remote: true do %>
+    <div class="favorite-btn">
+      <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+      <span>お気に入り <%= @favorite_count %></span>
+    </div>
+  <% end%>
+<% end%>
