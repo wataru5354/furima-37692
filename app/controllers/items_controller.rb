@@ -22,7 +22,6 @@ class ItemsController < ApplicationController
   def show
     @comments = @item.comments.includes(:user)
     @comment = Comment.new
-    @favorite_count = Favorite.where(item_id: @item.id).count
   end
 
   def edit

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :items do
     resources :purchases, only: [:index, :create ]
     resources :comments, only: :create
-    resources :favorites, only: [:create,:destroy]
+    resource :favorites, only: [:create,:destroy]
   end
   resources :cards, only:[:new, :create]
 end
